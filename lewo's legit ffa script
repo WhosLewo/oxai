@@ -1,3 +1,7 @@
+--[[
+didnt obfuscate it for those retards who think i added aimlock to the script.
+]]
+
 local function PrintCommands()
     print([[
 
