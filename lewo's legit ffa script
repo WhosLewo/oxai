@@ -1,7 +1,7 @@
 --[[
-didnt obfuscate it for those retards who think i added aimlock to the script.
+    didnt obfuscate it for those retards who think i added aimlock to my script over a fun gunanimtion.
+    (will add more to the script in the future)
 ]]
-
 local function PrintCommands()
     print([[
 
@@ -11,21 +11,21 @@ local function PrintCommands()
     Discord Server: discord.gg/YHJxaf9r7W OR https://discord.gg/YHJxaf9r7W
     ===========================================================================================
     Keybinds:
-    "R" - Resets you. (you can change it * in line 38 *)
+    "R" - Resets you. (you can change it * in line 42 *)
     "Y" - Activates Pawels Gun Animation. (To change GunAnimation to "U" YOU MUST reset.)
     "U" - Activates 2nd Gun Animation I addded. (To change GunAnimation to "Y" YOU MUST reset.)
     ===========================================================================================
     Chat Commands:
     "fov" - Changes you're FOV (FieldOfView). * I NEED TO ADD/FIX/MAKE * (For now YOULL have to change it manually)
-    * in line 23 *
+    * in line 27 *
     ===========================================================================================
 
     ]])
 end
 PrintCommands()
--- < fov > -- 
+-- [[*fov*]] -- 
 game:GetService'Workspace'.Camera.FieldOfView = 120
- -- Notify --
+ -- [[*notifys*]] --
 game.StarterGui:SetCore("SendNotification", {
     Title = "lewo's ffa script";
     Text = "lewo's ffa script Loaded (Made By Lewo)";
@@ -34,16 +34,16 @@ game.StarterGui:SetCore("SendNotification", {
 wait(1)
 game.StarterGui:SetCore("SendNotification", {
     Title = "Newest Update";
-    Text = "New GunAnimation (U)";
+    Text = "Got Leaked & New GunAnimation (U)";
 })
 -- [[*END*]] --
--- [[ Reset Key ]] --
+-- [[*Reset Key*]] --
 game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
     if KeyPressed == "r" then
     game.Players.LocalPlayer.Character.Humanoid.Health = 0
 end
 end)
--- chat --
+-- [[*chat*]] --
 --chat "/spy" to toggle!
 enabled = true
 --if true will check your messages too
@@ -108,9 +108,10 @@ if not player.PlayerGui:FindFirstChild("Chat") then wait(3) end
 local chatFrame = player.PlayerGui.Chat.Frame
 chatFrame.ChatChannelParentFrame.Visible = true
 chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
--- lightiing --
+-- [[*lighting/skybox*]] --
 
--- gun animation --
+  -- [[*END*]] --
+-- [[*gun animation*]] --
 game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
     if KeyPressed == "y" then
    local lplr = game:GetService("Players").LocalPlayer
@@ -143,7 +144,7 @@ game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
    end)
    end
    end)
-   -- 2nd gun animation --
+   -- [[*2nd gun animation*]] --
    game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
     if KeyPressed == "u" then
    local lplr = game:GetService("Players").LocalPlayer
@@ -176,7 +177,7 @@ game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
    end)
    end
    end)
--- bullet trails --
+-- [[*bullet trails*]] --
 game:GetService("RunService").RenderStepped:Connect(function()
     local plr
 
