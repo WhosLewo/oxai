@@ -1,0 +1,191 @@
+local function PrintCommands()
+    print([[
+
+    ===========================================================================================
+    * lewo's FFA script *
+    Discord: Has a weird letter so join the discord server.
+    Discord Server: discord.gg/YHJxaf9r7W OR https://discord.gg/YHJxaf9r7W
+    ===========================================================================================
+    Keybinds:
+    "R" - Resets you. (you can change it * in line 38 *)
+    "Y" - Activates Pawels Gun Animation. (To change GunAnimation to "U" YOU MUST reset.)
+    "U" - Activates 2nd Gun Animation I addded. (To change GunAnimation to "Y" YOU MUST reset.)
+    ===========================================================================================
+    Chat Commands:
+    "fov" - Changes you're FOV (FieldOfView). * I NEED TO ADD/FIX/MAKE * (For now YOULL have to change it manually)
+    * in line 23 *
+    ===========================================================================================
+
+    ]])
+end
+PrintCommands()
+-- < fov > -- 
+game:GetService'Workspace'.Camera.FieldOfView = 120
+ -- Notify --
+game.StarterGui:SetCore("SendNotification", {
+    Title = "lewo's ffa script";
+    Text = "lewo's ffa script Loaded (Made By Lewo)";
+    Icon = "http://www.roblox.com/asset/?id=5924280889";
+})
+wait(1)
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Newest Update";
+    Text = "New GunAnimation (U)";
+})
+-- [[*END*]] --
+-- [[ Reset Key ]] --
+game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
+    if KeyPressed == "r" then
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end
+end)
+-- chat --
+--chat "/spy" to toggle!
+enabled = true
+--if true will check your messages too
+spyOnMyself = true
+--if true will chat the logs publicly (fun, risky)
+public = false
+--if true will use /me to stand out
+publicItalics = true
+--customize private logs
+privateProperties = {
+	Color = Color3.fromRGB(244,127,255); 
+	Font = Enum.Font.SourceSansBold;
+	TextSize = 18;
+}
+--////////////////////////////////////////////////////////////////
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer or Players:GetPropertyChangedSignal("LocalPlayer"):Wait() or Players.LocalPlayer
+local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
+local instance = (_G.chatSpyInstance or 0) + 1
+_G.chatSpyInstance = instance
+
+local function onChatted(p,msg)
+	if _G.chatSpyInstance == instance then
+		if p==player and msg:lower():sub(1,4)=="/spy" then
+			enabled = not enabled
+			wait(0.3)
+			privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+			StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+		elseif enabled and (spyOnMyself==true or p~=player) then
+			msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
+			local hidden = true
+			local conn = getmsg.OnClientEvent:Connect(function(packet,channel)
+				if packet.SpeakerUserId==p.UserId and packet.Message==msg:sub(#msg-#packet.Message+1) and (channel=="All" or (channel=="Team" and public==false and Players[packet.FromSpeaker].Team==player.Team)) then
+					hidden = false
+				end
+			end)
+			wait(1)
+			conn:Disconnect()
+			if hidden and enabled then
+				if public then
+					saymsg:FireServer((publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
+				else
+					privateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
+					StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+				end
+			end
+		end
+	end
+end
+
+for _,p in ipairs(Players:GetPlayers()) do
+	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+end
+Players.PlayerAdded:Connect(function(p)
+	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+end)
+privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+if not player.PlayerGui:FindFirstChild("Chat") then wait(3) end
+local chatFrame = player.PlayerGui.Chat.Frame
+chatFrame.ChatChannelParentFrame.Visible = true
+chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
+-- lightiing --
+
+-- gun animation --
+game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
+    if KeyPressed == "y" then
+   local lplr = game:GetService("Players").LocalPlayer
+   local Glock = lplr.Backpack:FindFirstChild("Glock")
+   local Animation = Instance.new("Animation")
+   Animation.AnimationId = "rbxassetid://889968874"
+   local plr = game:GetService('Players').LocalPlayer
+   local HUM = plr.Character.Humanoid:LoadAnimation(Animation)
+   Glock.Equipped:connect(function()
+       wait(.1)
+       HUM:Play()
+       HUM:AdjustSpeed(0.0)
+   end)
+   Glock.Unequipped:connect(function()
+       HUM:Stop()
+   end)
+   local lplr = game:GetService("Players").LocalPlayer
+   local Shotty = lplr.Backpack:FindFirstChild("Shotty") 
+   local Animation = Instance.new("Animation")
+   Animation.AnimationId = "rbxassetid://889968874"
+   local plr = game:GetService('Players').LocalPlayer
+   local HUM = plr.Character.Humanoid:LoadAnimation(Animation)
+   Shotty.Equipped:connect(function()
+       wait(.1)
+       HUM:Play()
+       HUM:AdjustSpeed(0.0)
+   end)
+   Shotty.Unequipped:connect(function()
+       HUM:Stop()
+   end)
+   end
+   end)
+   -- 2nd gun animation --
+   game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
+    if KeyPressed == "u" then
+   local lplr = game:GetService("Players").LocalPlayer
+   local Glock = lplr.Backpack:FindFirstChild("Glock")
+   local Animation = Instance.new("Animation")
+   Animation.AnimationId = "rbxassetid://229339207"
+   local plr = game:GetService('Players').LocalPlayer
+   local HUM = plr.Character.Humanoid:LoadAnimation(Animation)
+   Glock.Equipped:connect(function()
+       wait(.1)
+       HUM:Play()
+       HUM:AdjustSpeed(0.0)
+   end)
+   Glock.Unequipped:connect(function()
+       HUM:Stop()
+   end)
+   local lplr = game:GetService("Players").LocalPlayer
+   local Shotty = lplr.Backpack:FindFirstChild("Shotty") 
+   local Animation = Instance.new("Animation")
+   Animation.AnimationId = "rbxassetid://229339207"
+   local plr = game:GetService('Players').LocalPlayer
+   local HUM = plr.Character.Humanoid:LoadAnimation(Animation)
+   Shotty.Equipped:connect(function()
+       wait(.1)
+       HUM:Play()
+       HUM:AdjustSpeed(0.0)
+   end)
+   Shotty.Unequipped:connect(function()
+       HUM:Stop()
+   end)
+   end
+   end)
+-- bullet trails --
+game:GetService("RunService").RenderStepped:Connect(function()
+    local plr
+
+    plr = game.Players.LocalPlayer
+
+    if plr.Character.Humanoid and plr.Character.Humanoid:findFirstChild("Bullet") then
+            if plr.Character.Humanoid.Bullet:findFirstChild("Trail") then
+                if plr.Character.Humanoid:findFirstChild("BulletDone", true) then
+                end
+                if plr.Character.Humanoid:findFirstChild("Bullet"):findFirstChild("Trail", true) then
+                    plr.Character.Humanoid:findFirstChild("Bullet").Trail.Lifetime = 0.2
+                    plr.Character.Humanoid:findFirstChild("Bullet").Name = "BulletDone"
+                end
+        end
+    end
+end)
