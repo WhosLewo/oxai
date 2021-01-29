@@ -3,5 +3,4 @@ Commands ill leak
 1. Void.
 2. BreakCam
 ^^Those seem to be the Autistic ones^^
-Discord under 
-Discord: souls.#0028 - ( Also leaking my webhoob IP logger )
+|| Discord: souls.#0028 - ( Also leaking my webhoob IP logger )
